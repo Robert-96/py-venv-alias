@@ -18,7 +18,7 @@ activate() {
 }
 
 venv() {
-    echo "${GREEN_FG}${BOLD_ON}Create a new virtual enviroment for $1...${RESET}"
+    echo "${GREEN_FG}${BOLD_ON}Create a new virtual environment for $1...${RESET}"
     python3 -m venv ~/.venv/$1
 }
 
