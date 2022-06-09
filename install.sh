@@ -31,6 +31,9 @@ clone_repo() {
     echo "${ITALIC_OFF}"
 }
 
+create_venv_directory() {
+    mkdir $HOME/.venv/
+}
 
 update_script() {
     local NAME=$1
@@ -48,6 +51,7 @@ update_script() {
 
 main() {
     clone_repo
+    create_venv_directory
 
     local FILES=( ".zshrc" ".bashrc" ".bash_profile" ".profile" )
 
