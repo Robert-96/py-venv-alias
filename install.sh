@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ESC="\033"
 RESET="${ESC}[0m"
