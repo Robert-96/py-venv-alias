@@ -22,7 +22,7 @@ activate() {
         venv=`basename "$PWD"`
     fi
 
-    if [ ! -f "~/.venv/$venv/bin/activate" ]; then
+    if [ ! -f "$HOME/.venv/$venv/bin/activate" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Chould not find a virtual environment named ${ITALIC_ON}'$venv'${ITALIC_OFF}.${RESET}"
         return 1
     fi
