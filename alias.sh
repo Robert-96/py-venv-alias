@@ -30,8 +30,8 @@ activate() {
     echo "${GREEN_FG}${BOLD_ON}Activate $venv...${RESET}"
     source "$HOME/.venv/$venv/bin/activate"
 
-    echo "${GREEN_FG}${BOLD_ON}Upgrade pip...${RESET}"
-    pip install -U pip
+    echo "${GREEN_FG}${BOLD_ON}Upgrade pip, setuptools and wheel...${RESET}"
+    pip install -U pip setuptools wheel
 }
 
 venv() {
