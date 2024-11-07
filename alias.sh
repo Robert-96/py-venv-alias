@@ -15,6 +15,9 @@ ITALIC_OFF="${ESC}[23m"
 activate() {
     if [ "$#" -gt 1 ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Illegal number of parameters.${RESET}"
+        echo ""
+        echo "usage: activate [<venv_name>]"
+
         return 1
     elif [ "$#" -eq 1 ]; then
         venv=$1
@@ -37,6 +40,9 @@ activate() {
 venv() {
     if [ "$#" -ne 1 ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Illegal number of parameters.${RESET}"
+        echo ""
+        echo "usage: venv <venv_name>"
+
         return 1
     fi
 
@@ -50,23 +56,40 @@ venv() {
 }
 
 mkv() {
+    if [ "$#" -ne 1 ]; then
+        echo "${RED_FG}mkv: illegal number of parameters${RESET}"
+        echo ""
+        echo "usage: mkv <venv_name>"
+
+        return 1
+    fi
+
     venv $1
 }
 
 rmv() {
     if [ "$#" -ne 1 ]; then
         echo "${RED_FG}Error: Illegal number of parameters.${RESET}"
+        echo ""
+        echo "usage: rmv <venv_name>"
+
         return 1
     fi
 
     if [ ! -d "$HOME/.venv/$1" ]; then
-        echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Chould not find a virtual environment named ${ITALIC_ON}'$1'${ITALIC_OFF}.${RESET}"
+        echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: No virtual environment named ${ITALIC_ON}'$1'${ITALIC_OFF} found.${RESET}"
         return 1
     fi
 
+    echo "${GREEN_FG}${BOLD_ON}Removing virtual environment ${ITALIC_ON}'$1'${ITALIC_OFF}...${RESET}"
     rm -rd "$HOME/.venv/$1"
 }
 
 lv() {
-    ls -l "$HOME/.venv/"
+    if [ -d "$HOME/.venv/" ]; then
+        ls -l "$HOME/.venv/"
+    else
+        echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Folder ${ITALIC_ON}'$HOME/.venv'${ITALIC_OFF} not found.${RESET}"
+        return 1
+    fi
 }
