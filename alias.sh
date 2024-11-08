@@ -15,19 +15,26 @@ ITALIC_OFF="${ESC}[23m"
 activate() {
     USAGE_MESSAGE="usage: activate [<venv_name>]"
 
-    if [ "$1" == "--help" ]; then
-        echo $USAGE_MESSAGE
-        echo ""
-        echo "Activates a specified virtual environment. Defaults to the current directory name if no name is provided."
-    fi
-
     if [ "$#" -gt 1 ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Illegal number of parameters.${RESET}"
         echo ""
         echo $USAGE_MESSAGE
 
         return 1
-    elif [ "$#" -eq 1 ]; then
+    fi
+
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo $USAGE_MESSAGE
+        echo ""
+        echo "  Activates a specified virtual environment. Defaults to the current directory name if no name is provided."
+        echo ""
+        echo "Options:"
+        echo "  -h, --help    Show this message and exit."
+
+        return 0
+    fi
+
+    if [ "$#" -eq 1 ]; then
         venv=$1
     elif [ "$#" -eq 0 ]; then
         venv=`basename "$PWD"`
@@ -48,20 +55,23 @@ activate() {
 venv() {
     USAGE_MESSAGE="usage: venv <venv_name>"
 
-    if [ "$1" == "--help" ]; then
-        echo $USAGE_MESSAGE
-        echo ""
-        echo "Creates a new virtual environment with the specified name."
-
-        return 0
-    fi
-
     if [ "$#" -ne 1 ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Illegal number of parameters.${RESET}"
         echo ""
         echo $USAGE_MESSAGE
 
         return 1
+    fi
+
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo $USAGE_MESSAGE
+        echo ""
+        echo "  Creates a new virtual environment with the specified name."
+        echo ""
+        echo "Options:"
+        echo "  -h, --help    Show this message and exit."
+
+        return 0
     fi
 
     if [ -e "$HOME/.venv/$1" ]; then
@@ -76,10 +86,13 @@ venv() {
 mkv() {
     USAGE_MESSAGE="usage: mkv <venv_name>"
 
-    if [ "$1" == "--help" ]; then
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
         echo $USAGE_MESSAGE
         echo ""
-        echo "Alias for the 'venv' function. Creates a new virtual environment with the specified name."
+        echo "  Alias for the 'venv' function. Creates a new virtual environment with the specified name."
+        echo ""
+        echo "Options:"
+        echo "  -h, --help    Show this message and exit."
 
         return 0
     fi
@@ -98,20 +111,31 @@ mkv() {
 rmv() {
     USAGE_MESSAGE="usage: rmv <venv_name>"
 
-    if [ "$1" == "--help" ]; then
-        echo $USAGE_MESSAGE
-        echo ""
-        echo "Removes the specified virtual environment."
-
-        return 0
-    fi
-
     if [ "$#" -ne 1 ]; then
         echo "${RED_FG}Error: Illegal number of parameters.${RESET}"
         echo ""
         echo $USAGE_MESSAGE
 
         return 1
+    fi
+
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo $USAGE_MESSAGE
+        echo ""
+        echo "  Removes the specified virtual environment."
+        echo ""
+        echo "Options:"
+        echo "  -h, --help    Show this message and exit."
+
+        return 0
+    fi
+
+    if [ "$1" = "--help" ]; then
+        echo $USAGE_MESSAGE
+        echo ""
+        echo "Removes the specified virtual environment."
+
+        return 0
     fi
 
     if [ ! -d "$HOME/.venv/$1" ]; then
@@ -124,10 +148,13 @@ rmv() {
 }
 
 lv() {
-    if [ "$1" == "--help" ]; then
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
         echo "usage: lv"
         echo ""
-        echo "Lists all virtual environments in the '$HOME/.venv' directory."
+        echo "  Lists all virtual environments in the '$HOME/.venv' directory."
+        echo ""
+        echo "Options:"
+        echo "  -h, --help    Show this message and exit."
 
         return 0
     fi
