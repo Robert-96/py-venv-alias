@@ -53,13 +53,20 @@ activate() {
         venv=`basename "$PWD"`
     fi
 
-    if [ ! -f "$VENV_DIR/$venv/bin/activate" ]; then
+    BASH_PATH="$VENV_DIR/$venv/bin/activate"
+    WINDOWS_PATH="$VENV_DIR/Scripts/activate"
+
+    if [ ! -f "$BASH_PATH" ] && [ ! -f "$WINDOWS_PATH" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Chould not find a virtual environment named ${ITALIC_ON}'$venv'${ITALIC_OFF}.${RESET}"
         return 1
     fi
 
     echo "${GREEN_FG}${BOLD_ON}Activate $venv...${RESET}"
-    source "$VENV_DIR/$venv/bin/activate"
+    if [ -f "$BASH_PATH"]; then
+        source "$BASH_PATH"
+    else
+        source "$WINDOWS_PATH"
+    fi
 
     echo "${GREEN_FG}${BOLD_ON}Upgrade pip, setuptools and wheel...${RESET}"
     pip install -U pip setuptools wheel
