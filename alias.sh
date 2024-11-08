@@ -1,15 +1,26 @@
 #!/bin/bash
 
-ESC="\033"
-RESET="${ESC}[0m"
+RESET=""
+GREEN_FG=""
+RED_FG=""
+BOLD_ON=""
+BOLD_OFF=""
+ITALIC_ON=""
+ITALIC_OFF=""
 
-GREEN_FG="${ESC}[32m"
-RED_FG="${ESC}[31m"
+# Add color and styles if the scirpt runs from a terminal
+if [ -t 1 ]; then
+    ESC="\033"
+    RESET="${ESC}[0m"
 
-BOLD_ON="${ESC}[1m"
-BOLD_OFF="${ESC}[22m"
-ITALIC_ON="${ESC}[3m"
-ITALIC_OFF="${ESC}[23m"
+    GREEN_FG="${ESC}[32m"
+    RED_FG="${ESC}[31m"
+
+    BOLD_ON="${ESC}[1m"
+    BOLD_OFF="${ESC}[22m"
+    ITALIC_ON="${ESC}[3m"
+    ITALIC_OFF="${ESC}[23m"
+fi
 
 
 activate() {
