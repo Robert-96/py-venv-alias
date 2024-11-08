@@ -104,7 +104,7 @@ rmv() {
         echo "Removes the specified virtual environment."
 
         return 0
-    if
+    fi
 
     if [ "$#" -ne 1 ]; then
         echo "${RED_FG}Error: Illegal number of parameters.${RESET}"
