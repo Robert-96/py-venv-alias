@@ -64,7 +64,7 @@ activate() {
     echo "${GREEN_FG}${BOLD_ON}Activate $venv...${RESET}"
     if [ -f "$BASH_PATH" ]; then
         source "$BASH_PATH"
-    elses
+    else
         source "$WINDOWS_PATH"
     fi
 
