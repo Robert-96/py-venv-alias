@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VENV_DIR="$HOME/.venv"
+
 RESET=""
 GREEN_FG=""
 RED_FG=""
@@ -51,13 +53,13 @@ activate() {
         venv=`basename "$PWD"`
     fi
 
-    if [ ! -f "$HOME/.venv/$venv/bin/activate" ]; then
+    if [ ! -f "$VENV_DIR/$venv/bin/activate" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Chould not find a virtual environment named ${ITALIC_ON}'$venv'${ITALIC_OFF}.${RESET}"
         return 1
     fi
 
     echo "${GREEN_FG}${BOLD_ON}Activate $venv...${RESET}"
-    source "$HOME/.venv/$venv/bin/activate"
+    source "$VENV_DIR/$venv/bin/activate"
 
     echo "${GREEN_FG}${BOLD_ON}Upgrade pip, setuptools and wheel...${RESET}"
     pip install -U pip setuptools wheel
@@ -85,13 +87,13 @@ venv() {
         return 0
     fi
 
-    if [ -e "$HOME/.venv/$1" ]; then
+    if [ -e "$VENV_DIR/$1" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: There already exists an environment named ${ITALIC_ON}'$1'${ITALIC_OFF}.${RESET}"
         return 1
     fi
 
     echo "${GREEN_FG}${BOLD_ON}Create a new virtual environment for ${ITALIC_ON}'$1'${ITALIC_OFF}...${RESET}"
-    python3 -m venv "$HOME/.venv/$1"
+    python3 -m venv "$VENV_DIR/$1"
 }
 
 mkv() {
@@ -149,20 +151,20 @@ rmv() {
         return 0
     fi
 
-    if [ ! -d "$HOME/.venv/$1" ]; then
+    if [ ! -d "$VENV_DIR/$1" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: No virtual environment named ${ITALIC_ON}'$1'${ITALIC_OFF} found.${RESET}"
         return 1
     fi
 
     echo "${GREEN_FG}${BOLD_ON}Removing virtual environment ${ITALIC_ON}'$1'${ITALIC_OFF}...${RESET}"
-    rm -rd "$HOME/.venv/$1"
+    rm -rd "$VENV_DIR/$1"
 }
 
 lv() {
     if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
         echo "usage: lv"
         echo ""
-        echo "  Lists all virtual environments in the '$HOME/.venv' directory."
+        echo "  Lists all virtual environments in the '$VENV_DIR' directory."
         echo ""
         echo "Options:"
         echo "  -h, --help    Show this message and exit."
@@ -170,10 +172,10 @@ lv() {
         return 0
     fi
 
-    if [ -d "$HOME/.venv/" ]; then
-        ls -l "$HOME/.venv/"
+    if [ -d "$VENV_DIR" ]; then
+        ls -l "$VENV_DIR"
     else
-        echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Folder ${ITALIC_ON}'$HOME/.venv'${ITALIC_OFF} not found.${RESET}"
+        echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Folder ${ITALIC_ON}'$VENV_DIR'${ITALIC_OFF} not found.${RESET}"
         return 1
     fi
 }
