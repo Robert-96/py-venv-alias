@@ -11,7 +11,7 @@ ITALIC_ON=""
 ITALIC_OFF=""
 
 # Add color and styles if the scirpt runs from a terminal
-if [ -t 1 ]; then
+if [ -t 1 ] && [ "$(expr substr $(uname -s) 1 5)" != "MINGW" ]; then
     ESC="\033"
     RESET="${ESC}[0m"
 
