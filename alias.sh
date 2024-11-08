@@ -54,7 +54,7 @@ activate() {
     fi
 
     BASH_PATH="$VENV_DIR/$venv/bin/activate"
-    WINDOWS_PATH="$VENV_DIR/Scripts/activate"
+    WINDOWS_PATH="$VENV_DIR/$venv/Scripts/activate"
 
     if [ ! -f "$BASH_PATH" ] && [ ! -f "$WINDOWS_PATH" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: Chould not find a virtual environment named ${ITALIC_ON}'$venv'${ITALIC_OFF}.${RESET}"
