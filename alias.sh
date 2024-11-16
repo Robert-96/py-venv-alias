@@ -64,12 +64,15 @@ activate() {
     echo "${GREEN_FG}${BOLD_ON}Activate $venv...${RESET}"
     if [ -f "$BASH_PATH" ]; then
         source "$BASH_PATH"
+
+        echo "${GREEN_FG}${BOLD_ON}Upgrade pip, setuptools and wheel...${RESET}"
+        pip install -U pip setuptools wheel
     else
         source "$WINDOWS_PATH"
-    fi
 
-    echo "${GREEN_FG}${BOLD_ON}Upgrade pip, setuptools and wheel...${RESET}"
-    pip install -U pip setuptools wheel
+        echo "${GREEN_FG}${BOLD_ON}Upgrade setuptools and wheel...${RESET}"
+        pip install -U setuptools wheel
+    fi
 }
 
 venv() {
