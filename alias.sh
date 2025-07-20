@@ -153,14 +153,6 @@ rmv() {
         return 0
     fi
 
-    if [ "$1" = "--help" ]; then
-        echo $USAGE_MESSAGE
-        echo ""
-        echo "Removes the specified virtual environment."
-
-        return 0
-    fi
-
     if [ ! -d "$VENV_DIR/$1" ]; then
         echo "${RED_FG}${BOLD_ON}Error${BOLD_OFF}: No virtual environment named ${ITALIC_ON}'$1'${ITALIC_OFF} found.${RESET}"
         return 1
