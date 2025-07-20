@@ -48,9 +48,9 @@ activate() {
     fi
 
     if [ "$#" -eq 1 ]; then
-        venv=$1
+        venv="$1"
     elif [ "$#" -eq 0 ]; then
-        venv=`basename "$PWD"`
+        venv="$(basename "$PWD")"
     fi
 
     BASH_PATH="$VENV_DIR/$venv/bin/activate"
